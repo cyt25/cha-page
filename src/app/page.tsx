@@ -22,9 +22,15 @@ const getOSTheme = () => {
 };
 
 export default function Home() {
-  const [theme, setTheme] = useState("auto");
+  const [theme, setTheme] = useState("dark");
   const [osTheme, setOsTheme] = useState("light");
+  const [isCharlie, setIsCharlie] = useState(false);
   const effectiveTheme = theme === "auto" ? osTheme : theme;
+  const canvasClasses = `transition-all ease-in-out duration-1000 ${
+    effectiveTheme === "light"
+      ? "contrast-125"
+      : "hue-rotate-30 brightness-50 contrast-200"
+  }`;
 
   useEffect(() => {
     const gradient = new Gradient();
@@ -59,58 +65,129 @@ export default function Home() {
     });
   };
 
+  const handleCharlie = () => {
+    setIsCharlie((prevIsCharlie) => {
+      return !prevIsCharlie;
+    });
+  };
+
   return (
     <main className="flex h-screen flex-row items-center relative">
       <canvas
         id="gradient-canvas"
-        className={effectiveTheme === "light" ? "" : "hue-rotate-30 brightness-50 contrast-200"}
+        className={canvasClasses}
         data-transition-in
       />
-      <button className="absolute top-24 right-24" onClick={toggleTheme}>
+      {/* Tailwind breakpoints: take effect at the specified breakpoint and above */}
+      <button
+        className="absolute top-6 right-6 sm:top-24 sm:right-24"
+        onClick={toggleTheme}
+      >
+        {/* <button className="absolute top-24 right-24" onClick={toggleTheme}> */}
         <ThemeIcon theme={theme} effectiveTheme={effectiveTheme} />
       </button>
-      <BigText isLight={effectiveTheme === "light"} />
+      <BigText isLight={effectiveTheme === "light"} isCharlie={isCharlie} />
+      <div></div>
+      <div className="">
+        <p
+          className={`transition-all ease-in-out duration-1000 drop-shadow-xl absolute sm:bottom-24 sm:right-24 bottom-6 right-6 text-xs font-normal ${
+            effectiveTheme === "light" ? "text-gray-900" : "text-gray-100"
+          }`}
+        >
+          🛠️ with Next.js + Tailwind
+        </p>
+        <p
+          className={`transition-color ease-in-out duration-1000 drop-shadow-xl absolute bottom-24 left-24 text-xs font-normal ${
+            effectiveTheme === "light" ? "text-gray-900" : "text-gray-100"
+          } hidden sm:block`}
+        >
+          {`My friends call me `}
+          {
+            <span
+              className="font-mono line-through hover:no-underline hover:cursor-pointer"
+              onClick={handleCharlie}
+            >
+              Charlie
+            </span>
+          }
+          {`! 🐕`}
+        </p>
+      </div>
     </main>
   );
 }
 
-function BigText({ isLight }) {
+function BigText({ isLight, isCharlie }) {
   const textColor = isLight ? "text-gray-900" : "text-gray-100";
-  console.log(isLight);
+  // SOMEHOW don't feel like this is how I should be using tailwind classes
+  const transitionClasses = "transition-all ease-in-out duration-1000";
+  const charlieClasses = `transition-all ease-in-out duration-1000 pl-2 box ${
+    isLight ? "text-gray-100" : "text-gray-900"
+  }`;
+  const charlesClasses = `transition-all ease-in-out duration-1000 pl-2`;
   return (
-    <div className="flex flex-col absolute p-24 w-full items-start justify-between">
+    <div className="flex flex-col absolute sm:p-24 p-6 w-full items-start justify-between">
       <h2
-        className={`text-3xl drop-shadow-xl font-extrabold transition-all ${textColor}`}
+        className={`text-3xl drop-shadow-xl font-extrabold ${transitionClasses} ${textColor}`}
       >
         Hey there,
       </h2>
       <h1
-        className={`text-5xl drop-shadow-2xl font-black transition-all ${textColor}`}
+        className={`flex text-5xl drop-shadow-2xl font-black ${transitionClasses} ${textColor}`}
       >
-        I'm Charles
+        {`I'm `}
+        <span className={isCharlie ? charlieClasses : charlesClasses}>
+          {isCharlie ? "Charlie" : "Charles"}
+        </span>
       </h1>
       <h2
-        className={`text-lg font-bold transition-all ${
+        className={`text-lg font-bold ${transitionClasses} ${
           !isLight ? "text-yellow-400" : "text-white"
         }`}
       >
         ✦✦✦✦✦
       </h2>
       <h2
-        className={`text-2xl drop-shadow-xl font-bold transition-all ${textColor}`}
+        className={`text-2xl drop-shadow-xl font-bold ${transitionClasses} ${textColor}`}
       >
-        I'm a Full Stack Software Engineer, previously at Wayfair.
+        {`I'm a Full Stack Software Engineer, previously at `}
+        {
+          <a
+            href="https://www.wayfair.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${
+              isLight ? "text-purple-800" : "text-purple-300"
+            } text-opacity-70 hover:font-extrabold hover:underline ${transitionClasses} transition-colors`}
+          >
+            Wayfair
+          </a>
+        }
+        {`.`}
       </h2>
       <h2
-        className={`text-2xl drop-shadow-xl font-bold transition-all ${textColor}`}
+        className={`pt-6 text-xl drop-shadow-xl font-bold ${transitionClasses} ${textColor}`}
       >
-        I'd love to hear from you!
+        I'm currently looking for a new role and I'd love to hear from you!
       </h2>
 
       <h2
-        className={`py-6 text-xl drop-shadow-xl font-semibold transition-all ${textColor}`}
+        className={`text-xl drop-shadow-sm font-semibold ${transitionClasses} ${textColor}`}
       >
-        {`Check out my resume ${(<a href="www.wayfair.com"></a>)}.`}
+        {`Check out my resume `}
+        {
+          <a
+            href="/files/charles-tark-resume-2023.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${
+              isLight ? "text-green-600" : "text-green-300"
+            } hover:font-extrabold hover:underline ${transitionClasses} transition-colors`}
+          >
+            here
+          </a>
+        }
+        {`.`}
       </h2>
     </div>
   );
