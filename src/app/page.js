@@ -138,7 +138,7 @@ function BigText({ isLight, isCharlie }) {
         </span>
       </h1>
       <h2
-        className={`text-lg font-bold ${transitionClasses} ${
+        className={`text-lg font-bold pt-2 pb-2 ${transitionClasses} ${
           !isLight ? "text-yellow-400" : "text-white"
         }`}
       >
@@ -163,13 +163,13 @@ function BigText({ isLight, isCharlie }) {
         {`.`}
       </h2>
       <h2
-        className={`pt-6 text-xl drop-shadow-xl font-bold ${transitionClasses} ${textColor}`}
+        className={`pt-6 text-2xl drop-shadow-xl font-bold ${transitionClasses} ${textColor}`}
       >
         {`I'm currently looking for a new role and I'd love to hear from you!`}
       </h2>
 
       <h2
-        className={`text-xl drop-shadow-sm font-semibold ${transitionClasses} ${textColor}`}
+        className={`text-2xl drop-shadow-sm font-semibold ${transitionClasses} ${textColor}`}
       >
         {`Check out my resume `}
         {
