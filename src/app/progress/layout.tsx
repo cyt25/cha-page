@@ -2,12 +2,12 @@ export default function TestLayout({
     children,
   }: {
     children: React.ReactNode
-  }) {
+  }): React.ReactNode {
     return (
       <div>
-        ProgressRoute's Layout Component (header)
+        ProgressRoute&aposs Layout Component (header)
         {children}
       </div>
-    )
+    );
   }
   

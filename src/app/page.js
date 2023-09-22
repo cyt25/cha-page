@@ -52,13 +52,10 @@ export default function Home() {
       switch (prevTheme) {
         case "auto":
           return "dark";
-          break;
         case "light":
           return "auto";
-          break;
         case "dark":
           return "light";
-          break;
         default:
           return "auto";
       }
@@ -168,7 +165,7 @@ function BigText({ isLight, isCharlie }) {
       <h2
         className={`pt-6 text-xl drop-shadow-xl font-bold ${transitionClasses} ${textColor}`}
       >
-        I'm currently looking for a new role and I'd love to hear from you!
+        {`I'm currently looking for a new role and I'd love to hear from you!`}
       </h2>
 
       <h2

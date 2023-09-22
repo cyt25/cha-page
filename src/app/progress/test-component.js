@@ -4,6 +4,7 @@
 import {useState} from 'react';
 
 const Loading = ({title}) => {
+  // eslint-disable-next-line
   const [percentage, setPercentage] = useState(0);
 
   // what do we use in react to increment state according to time
