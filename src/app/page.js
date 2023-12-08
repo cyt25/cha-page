@@ -2,6 +2,7 @@
 import { Gradient } from "./Gradient";
 import { useEffect, useState } from "react";
 import ThemeIcon from "./ThemeIcon";
+import Tooltip from "./Tooltip";
 
 const storageKey = "theme-preference";
 
@@ -25,6 +26,7 @@ export default function Home() {
   const [theme, setTheme] = useState("dark");
   const [osTheme, setOsTheme] = useState("light");
   const [isCharlie, setIsCharlie] = useState(false);
+  const [isHoveredButton, setIsHoveredButton] = useState(false);
   const effectiveTheme = theme === "auto" ? osTheme : theme;
   const canvasClasses = `transition-all ease-in-out duration-1000 ${
     effectiveTheme === "light"
@@ -68,6 +70,12 @@ export default function Home() {
     });
   };
 
+  const handleHoverButton = () => {
+    setIsHoveredButton((prevIsHoveredButton) => {
+      return !prevIsHoveredButton;
+    })
+  };
+
   return (
     <main className="flex h-screen flex-row items-center relative">
       <canvas
@@ -79,17 +87,19 @@ export default function Home() {
       <button
         className="absolute top-6 right-6 sm:top-24 sm:right-24"
         onClick={toggleTheme}
+        onMouseEnter={handleHoverButton}
+        onMouseLeave={handleHoverButton}
       >
         {/* <button className="absolute top-24 right-24" onClick={toggleTheme}> */}
         <ThemeIcon theme={theme} effectiveTheme={effectiveTheme} />
       </button>
+      {isHoveredButton && <Tooltip effectiveTheme={effectiveTheme} />}
       <BigText isLight={effectiveTheme === "light"} isCharlie={isCharlie} />
-      <div></div>
       <div className="">
         <p
           className={`transition-all ease-in-out duration-1000 drop-shadow-xl absolute sm:bottom-24 sm:right-24 bottom-6 right-6 text-xs font-normal ${
             effectiveTheme === "light" ? "text-gray-900" : "text-gray-100"
-          }`}
+          }`} 
         >
           🛠️ with Next.js + Tailwind
         </p>
