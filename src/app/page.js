@@ -70,12 +70,6 @@ export default function Home() {
     });
   };
 
-  const handleHoverButton = () => {
-    setIsHoveredButton((prevIsHoveredButton) => {
-      return !prevIsHoveredButton;
-    })
-  };
-
   return (
     <main className="flex h-screen flex-row items-center relative">
       <canvas
@@ -87,19 +81,24 @@ export default function Home() {
       <button
         className="absolute top-6 right-6 sm:top-24 sm:right-24"
         onClick={toggleTheme}
-        onMouseEnter={handleHoverButton}
-        onMouseLeave={handleHoverButton}
+        onMouseEnter={() => setIsHoveredButton(true)}
+        onMouseLeave={() => setIsHoveredButton(false)}
       >
         {/* <button className="absolute top-24 right-24" onClick={toggleTheme}> */}
         <ThemeIcon theme={theme} effectiveTheme={effectiveTheme} />
       </button>
-      {isHoveredButton && <Tooltip effectiveTheme={effectiveTheme} />}
+
+      <Tooltip
+        showTooltip={isHoveredButton && theme === "auto"}
+        effectiveTheme={effectiveTheme}
+      />
+
       <BigText isLight={effectiveTheme === "light"} isCharlie={isCharlie} />
       <div className="">
         <p
           className={`transition-all ease-in-out duration-1000 drop-shadow-xl absolute sm:bottom-24 sm:right-24 bottom-6 right-6 text-xs font-normal ${
             effectiveTheme === "light" ? "text-gray-900" : "text-gray-100"
-          }`} 
+          }`}
         >
           🛠️ with Next.js + Tailwind
         </p>
