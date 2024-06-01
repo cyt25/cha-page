@@ -156,17 +156,17 @@ function BigText({ isLight, isCharlie }) {
       <h2
         className={`text-2xl drop-shadow-xl font-bold ${transitionClasses} ${textColor}`}
       >
-        {`I'm a Full Stack Software Engineer, previously at `}
+        {`I'm a Full Stack Software Engineer, currently at `}
         {
           <a
-            href="https://www.wayfair.com"
+            href="https://www.biltrewards.com/"
             target="_blank"
             rel="noopener noreferrer"
             className={`${
               isLight ? "text-purple-800" : "text-purple-300"
             } text-opacity-70 hover:font-extrabold hover:underline ${transitionClasses} transition-colors`}
           >
-            Wayfair
+            Bilt Rewards
           </a>
         }
         {`.`}
