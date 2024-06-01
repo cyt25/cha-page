@@ -171,11 +171,11 @@ function BigText({ isLight, isCharlie }) {
         }
         {`.`}
       </h2>
-      <h2
-        className={`pt-6 text-2xl drop-shadow-xl font-bold ${transitionClasses} ${textColor}`}
-      >
-        {`I'm currently looking for a new role and I'd love to hear from you!`}
-      </h2>
+      // <h2
+      //   className={`pt-6 text-2xl drop-shadow-xl font-bold ${transitionClasses} ${textColor}`}
+      // >
+      //   {`I'm currently looking for a new role and I'd love to hear from you!`}
+      // </h2>
 
       <h2
         className={`text-2xl drop-shadow-sm font-semibold ${transitionClasses} ${textColor}`}
